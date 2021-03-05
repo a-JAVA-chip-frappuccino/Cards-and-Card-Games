@@ -1,0 +1,41 @@
+import random
+
+# set up general playing card class
+class PlayingCard:
+  def __init__(self, suit, value):
+    self.suit = suit
+    self.value = value
+
+# defines shuffle function
+def shuffle(deck):
+  for card in deck:
+    for i in range(len(deck)):
+      randomPosition = random.randint(0, len(deck) - 1)
+      tempCard = deck[i]
+      deck[i] = deck[randomPosition]
+      deck[randomPosition] = tempCard
+
+cards = []
+
+# adds card of each value and suit to deck
+for i in range(13):
+  cards.append(PlayingCard("diamonds", i + 1))
+  cards.append(PlayingCard("spades", i + 1))
+  cards.append(PlayingCard("hearts", i + 1))
+  cards.append(PlayingCard("clubs", i + 1))
+
+# check if user wants to include Jokers in deck and act accordingly
+addJokers = input("Enter \"yes\" to include Jokers: ")
+
+if addJokers == "yes":
+  cards.append(PlayingCard("joker", None))
+  cards.append(PlayingCard("joker", None))
+
+# shuffle the deck randomly
+timesToShuffle = input("Enter a number of times to shuffle the deck: ")
+
+for i in range(int(timesToShuffle)):
+  shuffle(cards)
+
+for card in cards:
+  print(card.suit, card.value)
